@@ -1,0 +1,2098 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>VILLAGE INFORMATION SYSTEM</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/AbaadiArea_1.js"></script>
+        <script src="data/Dewapur_road_2.js"></script>
+        <script src="data/village_point_4.js"></script>
+        <script src="data/railways_5.js"></script>
+        <script src="data/govillageline_6.js"></script>
+        <script src="data/household_7.js"></script>
+        <script src="data/vill_poll_8.js"></script>
+        <script src="data/waterbody_9.js"></script>
+        <script src="data/devapur_line_10.js"></script>
+        <script src="data/bank_dewa_11.js"></script>
+        <script src="data/facilities_dewa_12.js"></script>
+        <script src="data/crops_dewa_13.js"></script>
+        <script src="data/Edu_Dewa_14.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[26.325945138101194,84.46478586520901],[26.453790750429977,84.70682809210906]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        function pop_AbaadiArea_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Abaadi</th>\
+                        <td>' + (feature.properties['Abaadi'] !== null ? autolinker.link(feature.properties['Abaadi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AbaadiArea_1_0() {
+            return {
+                pane: 'pane_AbaadiArea_1',
+                interactive: true,
+            }
+        }
+        function style_AbaadiArea_1_1() {
+            return {
+                pane: 'pane_AbaadiArea_1',
+                opacity: 1,
+                color: 'rgba(179,90,42,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_AbaadiArea_1');
+        map.getPane('pane_AbaadiArea_1').style.zIndex = 401;
+        map.getPane('pane_AbaadiArea_1').style['mix-blend-mode'] = 'normal';
+        var layer_AbaadiArea_1 = new L.geoJson.multiStyle(json_AbaadiArea_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AbaadiArea_1',
+            layerName: 'layer_AbaadiArea_1',
+            pane: 'pane_AbaadiArea_1',
+            onEachFeature: pop_AbaadiArea_1,
+            styles: [style_AbaadiArea_1_0,style_AbaadiArea_1_1,]
+        });
+        bounds_group.addLayer(layer_AbaadiArea_1);
+        map.addLayer(layer_AbaadiArea_1);
+        function pop_Dewapur_road_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Road_Dewa</th>\
+                        <td>' + (feature.properties['Road_Dewa'] !== null ? autolinker.link(feature.properties['Road_Dewa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Dewapur_road_2_0(feature) {
+            switch(String(feature.properties['id'])) {
+                case '0':
+                    return {
+                pane: 'pane_Dewapur_road_2',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Dewapur_road_2',
+                opacity: 1,
+                color: 'rgba(241,124,74,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Dewapur_road_2',
+                opacity: 1,
+                color: 'rgba(254,201,128,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Dewapur_road_2',
+                opacity: 1,
+                color: 'rgba(255,255,191,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Dewapur_road_2',
+                opacity: 1,
+                color: 'rgba(199,233,173,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Dewapur_road_2',
+                opacity: 1,
+                color: 'rgba(128,191,172,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Dewapur_road_2',
+                opacity: 1,
+                color: 'rgba(43,131,186,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Dewapur_road_2');
+        map.getPane('pane_Dewapur_road_2').style.zIndex = 402;
+        map.getPane('pane_Dewapur_road_2').style['mix-blend-mode'] = 'normal';
+        var layer_Dewapur_road_2 = new L.geoJson(json_Dewapur_road_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Dewapur_road_2',
+            layerName: 'layer_Dewapur_road_2',
+            pane: 'pane_Dewapur_road_2',
+            onEachFeature: pop_Dewapur_road_2,
+            style: style_Dewapur_road_2_0,
+        });
+        bounds_group.addLayer(layer_Dewapur_road_2);
+        map.addLayer(layer_Dewapur_road_2);
+        map.createPane('pane_OSMStandard_3');
+        map.getPane('pane_OSMStandard_3').style.zIndex = 403;
+        var layer_OSMStandard_3 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_3',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_3;
+        map.addLayer(layer_OSMStandard_3);
+        function pop_village_point_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">vill_name</th>\
+                        <td>' + (feature.properties['vill_name'] !== null ? autolinker.link(feature.properties['vill_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">population</th>\
+                        <td>' + (feature.properties['population'] !== null ? autolinker.link(feature.properties['population'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Male</th>\
+                        <td>' + (feature.properties['Male'] !== null ? autolinker.link(feature.properties['Male'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Female</th>\
+                        <td>' + (feature.properties['Female'] !== null ? autolinker.link(feature.properties['Female'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Household</th>\
+                        <td>' + (feature.properties['Household'] !== null ? autolinker.link(feature.properties['Household'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_village_point_4_0() {
+            return {
+                pane: 'pane_village_point_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_village_point_4');
+        map.getPane('pane_village_point_4').style.zIndex = 404;
+        map.getPane('pane_village_point_4').style['mix-blend-mode'] = 'normal';
+        var layer_village_point_4 = new L.geoJson(json_village_point_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_village_point_4',
+            layerName: 'layer_village_point_4',
+            pane: 'pane_village_point_4',
+            onEachFeature: pop_village_point_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_village_point_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_village_point_4);
+        map.addLayer(layer_village_point_4);
+        function pop_railways_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['osm_id'] !== null ? autolinker.link(feature.properties['osm_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">name</th>\
+                        <td>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">type</th>\
+                        <td>' + (feature.properties['type'] !== null ? autolinker.link(feature.properties['type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_railways_5_0() {
+            return {
+                pane: 'pane_railways_5',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_railways_5');
+        map.getPane('pane_railways_5').style.zIndex = 405;
+        map.getPane('pane_railways_5').style['mix-blend-mode'] = 'normal';
+        var layer_railways_5 = new L.geoJson(json_railways_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_railways_5',
+            layerName: 'layer_railways_5',
+            pane: 'pane_railways_5',
+            onEachFeature: pop_railways_5,
+            style: style_railways_5_0,
+        });
+        bounds_group.addLayer(layer_railways_5);
+        map.addLayer(layer_railways_5);
+        function pop_govillageline_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID'] !== null ? autolinker.link(feature.properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">vilage</th>\
+                        <td>' + (feature.properties['vilage'] !== null ? autolinker.link(feature.properties['vilage'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">population</th>\
+                        <td>' + (feature.properties['population'] !== null ? autolinker.link(feature.properties['population'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_govillageline_6_0(feature) {
+            switch(String(feature.properties['FID'])) {
+                case '968':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(247,252,245,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1404':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(238,249,235,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2687':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(229,245,224,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2920':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(213,239,207,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3166':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(197,233,190,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3368':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(178,224,171,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4011':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(158,216,152,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4524':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(134,205,133,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4567':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(111,194,115,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5081':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(84,181,103,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '6823':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(61,167,90,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '7233':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(45,151,77,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '7652':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(29,134,65,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '8858':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(9,117,51,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '14689':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,95,38,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,68,27,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '0':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '11':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '13':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '14':
+                    return {
+                pane: 'pane_govillageline_6',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_govillageline_6');
+        map.getPane('pane_govillageline_6').style.zIndex = 406;
+        map.getPane('pane_govillageline_6').style['mix-blend-mode'] = 'normal';
+        var layer_govillageline_6 = new L.geoJson(json_govillageline_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_govillageline_6',
+            layerName: 'layer_govillageline_6',
+            pane: 'pane_govillageline_6',
+            onEachFeature: pop_govillageline_6,
+            style: style_govillageline_6_0,
+        });
+        bounds_group.addLayer(layer_govillageline_6);
+        map.addLayer(layer_govillageline_6);
+        function pop_household_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID'] !== null ? autolinker.link(feature.properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">vilage</th>\
+                        <td>' + (feature.properties['vilage'] !== null ? autolinker.link(feature.properties['vilage'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">population</th>\
+                        <td>' + (feature.properties['population'] !== null ? autolinker.link(feature.properties['population'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Household</th>\
+                        <td>' + (feature.properties['Household'] !== null ? autolinker.link(feature.properties['Household'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_household_7_0(feature) {
+            switch(String(feature.properties['Household'])) {
+                case '127':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '238':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,249,235,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '422':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,245,224,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '448':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,239,207,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '546':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,233,190,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '604':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(178,224,171,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '626':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(158,216,152,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '743':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(134,205,133,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '755':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(111,194,115,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '916':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(84,181,103,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1177':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(61,167,90,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1244':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(45,151,77,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1329':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(29,134,65,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1442':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(9,117,51,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2432':
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,95,38,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_household_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,68,27,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_household_7');
+        map.getPane('pane_household_7').style.zIndex = 407;
+        map.getPane('pane_household_7').style['mix-blend-mode'] = 'normal';
+        var layer_household_7 = new L.geoJson(json_household_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_household_7',
+            layerName: 'layer_household_7',
+            pane: 'pane_household_7',
+            onEachFeature: pop_household_7,
+            style: style_household_7_0,
+        });
+        bounds_group.addLayer(layer_household_7);
+        map.addLayer(layer_household_7);
+        function pop_vill_poll_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID'] !== null ? autolinker.link(feature.properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">vilage</th>\
+                        <td>' + (feature.properties['vilage'] !== null ? autolinker.link(feature.properties['vilage'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">population</th>\
+                        <td>' + (feature.properties['population'] !== null ? autolinker.link(feature.properties['population'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_vill_poll_8_0(feature) {
+            switch(String(feature.properties['population'])) {
+                case '968':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,251,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '1404':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,243,251,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2687':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(222,235,247,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '2920':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,227,243,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3166':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,218,239,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '3368':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(176,210,232,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4011':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(154,200,225,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4524':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(128,186,219,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '4567':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,171,213,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5081':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(82,157,204,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '6823':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(62,142,196,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '7233':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(45,125,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '7652':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(28,108,177,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '8858':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(15,90,163,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '14689':
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(8,70,140,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_vill_poll_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(8,48,107,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_vill_poll_8');
+        map.getPane('pane_vill_poll_8').style.zIndex = 408;
+        map.getPane('pane_vill_poll_8').style['mix-blend-mode'] = 'normal';
+        var layer_vill_poll_8 = new L.geoJson(json_vill_poll_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_vill_poll_8',
+            layerName: 'layer_vill_poll_8',
+            pane: 'pane_vill_poll_8',
+            onEachFeature: pop_vill_poll_8,
+            style: style_vill_poll_8_0,
+        });
+        bounds_group.addLayer(layer_vill_poll_8);
+        map.addLayer(layer_vill_poll_8);
+        function pop_waterbody_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">waterbody</th>\
+                        <td>' + (feature.properties['waterbody'] !== null ? autolinker.link(feature.properties['waterbody'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_waterbody_9_0() {
+            return {
+                pane: 'pane_waterbody_9',
+                interactive: true,
+            }
+        }
+        function style_waterbody_9_1() {
+            return {
+                pane: 'pane_waterbody_9',
+                opacity: 1,
+                color: 'rgba(38,89,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_waterbody_9');
+        map.getPane('pane_waterbody_9').style.zIndex = 409;
+        map.getPane('pane_waterbody_9').style['mix-blend-mode'] = 'normal';
+        var layer_waterbody_9 = new L.geoJson.multiStyle(json_waterbody_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_waterbody_9',
+            layerName: 'layer_waterbody_9',
+            pane: 'pane_waterbody_9',
+            onEachFeature: pop_waterbody_9,
+            styles: [style_waterbody_9_0,style_waterbody_9_1,]
+        });
+        bounds_group.addLayer(layer_waterbody_9);
+        map.addLayer(layer_waterbody_9);
+        function pop_devapur_line_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">FID</th>\
+                        <td>' + (feature.properties['FID'] !== null ? autolinker.link(feature.properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_devapur_line_10_0() {
+            return {
+                pane: 'pane_devapur_line_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_devapur_line_10');
+        map.getPane('pane_devapur_line_10').style.zIndex = 410;
+        map.getPane('pane_devapur_line_10').style['mix-blend-mode'] = 'normal';
+        var layer_devapur_line_10 = new L.geoJson(json_devapur_line_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_devapur_line_10',
+            layerName: 'layer_devapur_line_10',
+            pane: 'pane_devapur_line_10',
+            onEachFeature: pop_devapur_line_10,
+            style: style_devapur_line_10_0,
+        });
+        bounds_group.addLayer(layer_devapur_line_10);
+        map.addLayer(layer_devapur_line_10);
+        function pop_bank_dewa_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bank</th>\
+                        <td>' + (feature.properties['Bank'] !== null ? autolinker.link(feature.properties['Bank'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_bank_dewa_11_0() {
+            return {
+                pane: 'pane_bank_dewa_11',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(117,58,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(149,74,162,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_bank_dewa_11');
+        map.getPane('pane_bank_dewa_11').style.zIndex = 411;
+        map.getPane('pane_bank_dewa_11').style['mix-blend-mode'] = 'normal';
+        var layer_bank_dewa_11 = new L.geoJson(json_bank_dewa_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_bank_dewa_11',
+            layerName: 'layer_bank_dewa_11',
+            pane: 'pane_bank_dewa_11',
+            onEachFeature: pop_bank_dewa_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_bank_dewa_11_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_bank_dewa_11);
+        map.addLayer(layer_bank_dewa_11);
+        function pop_facilities_dewa_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">facilitiy</th>\
+                        <td>' + (feature.properties['facilitiy'] !== null ? autolinker.link(feature.properties['facilitiy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_facilities_dewa_12_0(feature) {
+            switch(String(feature.properties['facilitiy'])) {
+                case 'Hotel and Restaurent':
+                    return {
+                pane: 'pane_facilities_dewa_12',
+                shape: 'triangle',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Hydroponics Farming':
+                    return {
+                pane: 'pane_facilities_dewa_12',
+                shape: 'triangle',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(234,99,62,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kiranna Store':
+                    return {
+                pane: 'pane_facilities_dewa_12',
+                shape: 'triangle',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,174,97,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Laxmi Balaji Gaushala':
+                    return {
+                pane: 'pane_facilities_dewa_12',
+                shape: 'triangle',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,215,144,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Madhusudhan Garden':
+                    return {
+                pane: 'pane_facilities_dewa_12',
+                shape: 'triangle',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Medical Store':
+                    return {
+                pane: 'pane_facilities_dewa_12',
+                shape: 'triangle',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,238,178,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Patel Poultry':
+                    return {
+                pane: 'pane_facilities_dewa_12',
+                shape: 'triangle',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,221,164,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Prabhat Gym Center':
+                    return {
+                pane: 'pane_facilities_dewa_12',
+                shape: 'triangle',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,176,175,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_facilities_dewa_12',
+                shape: 'triangle',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_facilities_dewa_12');
+        map.getPane('pane_facilities_dewa_12').style.zIndex = 412;
+        map.getPane('pane_facilities_dewa_12').style['mix-blend-mode'] = 'normal';
+        var layer_facilities_dewa_12 = new L.geoJson(json_facilities_dewa_12, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_facilities_dewa_12',
+            layerName: 'layer_facilities_dewa_12',
+            pane: 'pane_facilities_dewa_12',
+            onEachFeature: pop_facilities_dewa_12,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_facilities_dewa_12_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_facilities_dewa_12);
+        map.addLayer(layer_facilities_dewa_12);
+        function pop_crops_dewa_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">crops</th>\
+                        <td>' + (feature.properties['crops'] !== null ? autolinker.link(feature.properties['crops'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_crops_dewa_13_0(feature) {
+            switch(String(feature.properties['crops'])) {
+                case 'mango':
+                    return {
+                pane: 'pane_crops_dewa_13',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'potato':
+                    return {
+                pane: 'pane_crops_dewa_13',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,234,195,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'vegetables':
+                    return {
+                pane: 'pane_crops_dewa_13',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,200,124,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'wheat':
+                    return {
+                pane: 'pane_crops_dewa_13',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(42,146,74,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_crops_dewa_13',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,68,27,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_crops_dewa_13');
+        map.getPane('pane_crops_dewa_13').style.zIndex = 413;
+        map.getPane('pane_crops_dewa_13').style['mix-blend-mode'] = 'normal';
+        var layer_crops_dewa_13 = new L.geoJson(json_crops_dewa_13, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_crops_dewa_13',
+            layerName: 'layer_crops_dewa_13',
+            pane: 'pane_crops_dewa_13',
+            onEachFeature: pop_crops_dewa_13,
+            style: style_crops_dewa_13_0,
+        });
+        bounds_group.addLayer(layer_crops_dewa_13);
+        map.addLayer(layer_crops_dewa_13);
+        function pop_Edu_Dewa_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Edu_insti</th>\
+                        <td>' + (feature.properties['Edu_insti'] !== null ? autolinker.link(feature.properties['Edu_insti'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Edu_Dewa_14_0() {
+            return {
+                pane: 'pane_Edu_Dewa_14',
+                shape: 'diamond',
+                radius: 9.6,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,123,182,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Edu_Dewa_14');
+        map.getPane('pane_Edu_Dewa_14').style.zIndex = 414;
+        map.getPane('pane_Edu_Dewa_14').style['mix-blend-mode'] = 'normal';
+        var layer_Edu_Dewa_14 = new L.geoJson(json_Edu_Dewa_14, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Edu_Dewa_14',
+            layerName: 'layer_Edu_Dewa_14',
+            pane: 'pane_Edu_Dewa_14',
+            onEachFeature: pop_Edu_Dewa_14,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Edu_Dewa_14_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Edu_Dewa_14);
+        map.addLayer(layer_Edu_Dewa_14);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>VILLAGE INFORMATION SYSTEM</h2>';
+            };
+            title.addTo(map);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Edu_Dewa_14.png" /> Edu_Dewa': layer_Edu_Dewa_14,'crops_dewa<br /><table><tr><td style="text-align: center;"><img src="legend/crops_dewa_13_mango0.png" /></td><td>mango</td></tr><tr><td style="text-align: center;"><img src="legend/crops_dewa_13_potato1.png" /></td><td>potato</td></tr><tr><td style="text-align: center;"><img src="legend/crops_dewa_13_vegetables2.png" /></td><td>vegetables</td></tr><tr><td style="text-align: center;"><img src="legend/crops_dewa_13_wheat3.png" /></td><td>wheat</td></tr><tr><td style="text-align: center;"><img src="legend/crops_dewa_13_4.png" /></td><td></td></tr></table>': layer_crops_dewa_13,'facilities_dewa<br /><table><tr><td style="text-align: center;"><img src="legend/facilities_dewa_12_HotelandRestaurent0.png" /></td><td>Hotel and Restaurent</td></tr><tr><td style="text-align: center;"><img src="legend/facilities_dewa_12_HydroponicsFarming1.png" /></td><td>Hydroponics Farming</td></tr><tr><td style="text-align: center;"><img src="legend/facilities_dewa_12_KirannaStore2.png" /></td><td>Kiranna Store</td></tr><tr><td style="text-align: center;"><img src="legend/facilities_dewa_12_LaxmiBalajiGaushala3.png" /></td><td>Laxmi Balaji Gaushala</td></tr><tr><td style="text-align: center;"><img src="legend/facilities_dewa_12_MadhusudhanGarden4.png" /></td><td>Madhusudhan Garden</td></tr><tr><td style="text-align: center;"><img src="legend/facilities_dewa_12_MedicalStore5.png" /></td><td>Medical Store</td></tr><tr><td style="text-align: center;"><img src="legend/facilities_dewa_12_PatelPoultry6.png" /></td><td>Patel Poultry</td></tr><tr><td style="text-align: center;"><img src="legend/facilities_dewa_12_PrabhatGymCenter7.png" /></td><td>Prabhat Gym Center</td></tr><tr><td style="text-align: center;"><img src="legend/facilities_dewa_12_8.png" /></td><td></td></tr></table>': layer_facilities_dewa_12,'<img src="legend/bank_dewa_11.png" /> bank_dewa': layer_bank_dewa_11,'<img src="legend/devapur_line_10.png" /> devapur_line': layer_devapur_line_10,'<img src="legend/waterbody_9.png" /> waterbody': layer_waterbody_9,'vill_poll<br /><table><tr><td style="text-align: center;"><img src="legend/vill_poll_8_9680.png" /></td><td>968</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_14041.png" /></td><td>1404</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_26872.png" /></td><td>2687</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_29203.png" /></td><td>2920</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_31664.png" /></td><td>3166</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_33685.png" /></td><td>3368</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_40116.png" /></td><td>4011</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_45247.png" /></td><td>4524</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_45678.png" /></td><td>4567</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_50819.png" /></td><td>5081</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_682310.png" /></td><td>6823</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_723311.png" /></td><td>7233</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_765212.png" /></td><td>7652</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_885813.png" /></td><td>8858</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_1468914.png" /></td><td>14689</td></tr><tr><td style="text-align: center;"><img src="legend/vill_poll_8_15.png" /></td><td></td></tr></table>': layer_vill_poll_8,'household<br /><table><tr><td style="text-align: center;"><img src="legend/household_7_1270.png" /></td><td>127</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_2381.png" /></td><td>238</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_4222.png" /></td><td>422</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_4483.png" /></td><td>448</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_5464.png" /></td><td>546</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_6045.png" /></td><td>604</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_6266.png" /></td><td>626</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_7437.png" /></td><td>743</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_7558.png" /></td><td>755</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_9169.png" /></td><td>916</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_117710.png" /></td><td>1177</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_124411.png" /></td><td>1244</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_132912.png" /></td><td>1329</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_144213.png" /></td><td>1442</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_243214.png" /></td><td>2432</td></tr><tr><td style="text-align: center;"><img src="legend/household_7_15.png" /></td><td></td></tr></table>': layer_household_7,'govillageline<br /><table><tr><td style="text-align: center;"><img src="legend/govillageline_6_9680.png" /></td><td>968</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_14041.png" /></td><td>1404</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_26872.png" /></td><td>2687</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_29203.png" /></td><td>2920</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_31664.png" /></td><td>3166</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_33685.png" /></td><td>3368</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_40116.png" /></td><td>4011</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_45247.png" /></td><td>4524</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_45678.png" /></td><td>4567</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_50819.png" /></td><td>5081</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_682310.png" /></td><td>6823</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_723311.png" /></td><td>7233</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_765212.png" /></td><td>7652</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_885813.png" /></td><td>8858</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_1468914.png" /></td><td>14689</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_15.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_016.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_117.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_218.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_319.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_420.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_521.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_622.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_723.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_824.png" /></td><td>8</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_925.png" /></td><td>9</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_1026.png" /></td><td>10</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_1127.png" /></td><td>11</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_1228.png" /></td><td>12</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_1329.png" /></td><td>13</td></tr><tr><td style="text-align: center;"><img src="legend/govillageline_6_1430.png" /></td><td>14</td></tr></table>': layer_govillageline_6,'<img src="legend/railways_5.png" /> railways': layer_railways_5,'<img src="legend/village_point_4.png" /> village_point': layer_village_point_4,"OSM Standard": layer_OSMStandard_3,'Dewapur_road<br /><table><tr><td style="text-align: center;"><img src="legend/Dewapur_road_2_00.png" /></td><td>0</td></tr><tr><td style="text-align: center;"><img src="legend/Dewapur_road_2_11.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Dewapur_road_2_22.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/Dewapur_road_2_33.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Dewapur_road_2_44.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Dewapur_road_2_55.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/Dewapur_road_2_6.png" /></td><td></td></tr></table>': layer_Dewapur_road_2,'<img src="legend/AbaadiArea_1.png" /> Abaadi Area': layer_AbaadiArea_1,"Google Hybrid": layer_GoogleHybrid_0,}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_village_point_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['vill_name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'MS Reference Sans Serif\', sans-serif;">' + layer.feature.properties['vill_name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_village_point_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_bank_dewa_11.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Bank'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Stencil\', sans-serif;">' + layer.feature.properties['Bank']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_bank_dewa_11'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_facilities_dewa_12.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['facilitiy'] !== null?String('<div style="color: #646d27; font-size: 10pt; font-family: \'Georgia\', sans-serif;">' + layer.feature.properties['facilitiy']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_facilities_dewa_12'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Edu_Dewa_14.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Edu_insti'] !== null?String('<div style="color: #ee0000; font-size: 10pt; font-family: \'Copperplate Gothic Bold\', sans-serif;">' + layer.feature.properties['Edu_insti']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Edu_Dewa_14'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_village_point_4,layer_bank_dewa_11,layer_facilities_dewa_12,layer_Edu_Dewa_14]);
+        map.on("zoomend", function(){
+            resetLabels([layer_village_point_4,layer_bank_dewa_11,layer_facilities_dewa_12,layer_Edu_Dewa_14]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_village_point_4,layer_bank_dewa_11,layer_facilities_dewa_12,layer_Edu_Dewa_14]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_village_point_4,layer_bank_dewa_11,layer_facilities_dewa_12,layer_Edu_Dewa_14]);
+        });
+        </script>
+    </body>
+</html>
