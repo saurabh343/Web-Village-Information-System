@@ -1,0 +1,2 @@
+# Village Information System
+ Village Information System means the management of village related information in a technological environment, which will help the rural planners for the planning and implementation of plans in rural areas. It basically reduces the time and cost involved with the creation of data base for the planning. It comprises all the information related to the facilities, infrastructure, population, building type, etc. These informations are needed to analyze the existing scenario at the development stage in the village.
